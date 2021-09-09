@@ -9,13 +9,13 @@ CREATE DATABASE vidsic
 CREATE TABLE user_t (
     id          INT             AUTO_INCREMENT PRIMARY KEY,
     nickname    VARCHAR(255)    NOT NULL,
-    email       VARCHAR(255)    NOT NULL,
+    email       VARCHAR(255)    UNIQUE,
     avator      VARCHAR(255)    DEFAULT '/api/static/avator/default_avator.png',
     password    VARCHAR(255)    NOT NULL,
     competence  VARCHAR(64)     DEFAULT 'user',
     birthday    DATE            NOT NULL,
     intro       VARCHAR(255)    NOT NULL,
-    token       VARCHAR(255)    NOT NULL
+    token       VARCHAR(255)    UNIQUE
 )AUTO_INCREMENT=1000;
 
 /*
