@@ -1,0 +1,4 @@
+{
+    "staticPath": "./static",
+    "port": ":8081"
+}
