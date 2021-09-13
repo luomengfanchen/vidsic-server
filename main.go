@@ -24,6 +24,9 @@ func main() {
 
 		// 注册接口
 		api.POST("/register", controller.Register)
+
+		// 获取最新视频
+		api.GET("/video", controller.LatestVideo)
 	}
 
 	r.Run(utils.Config.Port)
