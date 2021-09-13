@@ -30,6 +30,9 @@ func main() {
 
 		// 获取最新文章
 		api.GET("/article", controller.LatestArticle)
+
+		// 获取最新音乐
+		api.GET("/music", controller.LatestMusic)
 	}
 
 	r.Run(utils.Config.Port)
