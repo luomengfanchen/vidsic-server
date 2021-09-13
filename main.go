@@ -27,6 +27,9 @@ func main() {
 
 		// 获取最新视频
 		api.GET("/video", controller.LatestVideo)
+
+		// 获取最新文章
+		api.GET("/article", controller.LatestArticle)
 	}
 
 	r.Run(utils.Config.Port)
