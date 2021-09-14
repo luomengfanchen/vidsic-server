@@ -65,8 +65,9 @@ CREATE TABLE video_t (
 CREATE TABLE commit_t (
     id          INT             AUTO_INCREMENT PRIMARY KEY,
     name        VARCHAR(255)    NOT NULL,
-    type        VARCHAR(255)    NOT NULL,
+    date        DATETIME        NOT NULL,
     path        VARCHAR(255)    NOT NULL,
+    type        VARCHAR(255)    NOT NULL,
     status      BOOLEAN         DEFAULT false,
     commiter    INT             NOT NULL
 )AUTO_INCREMENT=1000;

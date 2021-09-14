@@ -2,6 +2,7 @@ package main
 
 import (
 	"vidsic/controller"
+	"vidsic/middleware"
 	"vidsic/utils"
 
 	"github.com/gin-gonic/gin"
@@ -33,6 +34,12 @@ func main() {
 
 		// 获取最新音乐
 		api.GET("/music", controller.LatestMusic)
+
+		// 使用验证中间件验证用户身份
+		auth := api.Group("/auth",middleware.AuthorizeMiddle)
+		{
+			auth.POST("/commit", controller.Commit)
+		}
 	}
 
 	r.Run(utils.Config.Port)
