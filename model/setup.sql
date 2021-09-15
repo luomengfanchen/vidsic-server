@@ -32,6 +32,17 @@ CREATE TABLE article_t (
 )AUTO_INCREMENT=1000;
 
 /*
+    图像文件信息表
+*/
+CREATE TABLE image_t (
+    id      INT             AUTO_INCREMENT PRIMARY KEY,
+    name    VARCHAR(255)    NOT NULL,
+    date    DATETIME        NOT NULL,
+    author  INT             NOT NULL,
+    path    VARCHAR(255)    NOT NULL
+)AUTO_INCREMENT=1000;
+
+/*
     音乐文件信息表
 */
 CREATE TABLE music_t (

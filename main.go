@@ -38,7 +38,11 @@ func main() {
 		// 使用验证中间件验证用户身份
 		auth := api.Group("/auth",middleware.AuthorizeMiddle)
 		{
+			// 接收上传文件
 			auth.POST("/commit", controller.Commit)
+
+			// 接收上传文件信息
+			auth.POST("/upload", controller.Upload)
 		}
 	}
 
