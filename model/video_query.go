@@ -39,3 +39,20 @@ func QueryVideo(limit int64) ([]Video, error) {
 
 	return videoList, err
 }
+
+func QueryRowVideo(id int) (Video, error){
+	sql := "SELECT id, name, date, author, cover, type, path, views FROM video_t WHERE id = ?"
+	stmt, err := Db.Prepare(sql)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	defer stmt.Close()
+
+	var video Video
+	err = stmt.QueryRow(id).Scan(&video.Id, &video.Name, &video.Date, &video.Author, &video.Cover, &video.Type, &video.Path, &video.Views)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	return video, err
+}

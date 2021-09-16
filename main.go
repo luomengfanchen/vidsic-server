@@ -29,6 +29,8 @@ func main() {
 		// 获取最新视频
 		api.GET("/video", controller.LatestVideo)
 
+		api.GET("/video/:id", controller.GetVideo)
+
 		// 获取最新文章
 		api.GET("/article", controller.LatestArticle)
 
