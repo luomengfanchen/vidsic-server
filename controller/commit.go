@@ -46,17 +46,21 @@ func Commit(c *gin.Context) {
 	nowTime := time.Now().Unix()
 	timeStr := strconv.Itoa(int(nowTime))
 
-	baseURL := utils.Config.StaticPath
+	filePath := utils.Config.StaticPath
+	baseURL := "/api/static"
 	if filetype == "video" {
+		filePath += "/video/"
 		baseURL += "/video/"
-	} else if baseURL == "music" {
+	} else if filetype == "music" {
+		filePath += "/music/"
 		baseURL += "/music/"
 	} else {
+		filePath += "/image/"
 		baseURL += "/image/"
 	}
 
 	// 保存文件
-	err = c.SaveUploadedFile(file, baseURL+timeStr+"@"+file.Filename)
+	err = c.SaveUploadedFile(file, filePath+timeStr+"@"+file.Filename)
 	if err != nil {
 		fmt.Println(err.Error())
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -68,9 +72,9 @@ func Commit(c *gin.Context) {
 	// 生成表数据
 	commit := model.Commit{
 		Name:     timeStr + "@" + file.Filename,
-		Date:     time.Now().Format("2006-01-02 15:04:05"),
+		Date:     utils.NowTime(),
 		Type:     filetype,
-		Path:     baseURL + file.Filename,
+		Path:     baseURL + timeStr + "@" + file.Filename,
 		Commiter: id,
 	}
 
@@ -97,7 +101,7 @@ func Commit(c *gin.Context) {
 	// 返回成功响应
 	c.JSON(http.StatusOK, gin.H{
 		"msg": "ok",
-		"date": gin.H{
+		"data": gin.H{
 			"id": commitId,
 		},
 	})

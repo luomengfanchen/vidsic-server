@@ -46,28 +46,30 @@ CREATE TABLE image_t (
     音乐文件信息表
 */
 CREATE TABLE music_t (
-    id      INT             AUTO_INCREMENT PRIMARY KEY,
-    name    VARCHAR(255)    NOT NULL,
-    date    DATETIME        NOT NULL,
-    singer  VARCHAR(255)    NOT NULL,
-    cover   VARCHAR(255)    DEFAULT '/api/static/image/music_cover.jpg',
-    type    VARCHAR(255)    NOT NULL,
-    path    VARCHAR(255)    NOT NULL,
-    views   INT             DEFAULT 0
+    id          INT             AUTO_INCREMENT PRIMARY KEY,
+    name        VARCHAR(255)    NOT NULL,
+    descript    VARCHAR(255)    NOT NULL,
+    date        DATETIME        NOT NULL,
+    singer      VARCHAR(255)    NOT NULL,
+    cover       VARCHAR(255)    DEFAULT '/api/static/image/music_cover.jpg',
+    type        VARCHAR(255)    NOT NULL,
+    path        VARCHAR(255)    NOT NULL,
+    views       INT             DEFAULT 0
 )AUTO_INCREMENT=1000;
 
 /*
     视频文件信息表
 */
 CREATE TABLE video_t (
-    id      INT             AUTO_INCREMENT PRIMARY KEY,
-    name    VARCHAR(255)    NOT NULL,
-    date    DATETIME        NOT NULL,
-    author  INT             NOT NULL,
-    cover   VARCHAR(255)    DEFAULT '/api/static/image/video_cover.jpg',
-    type    VARCHAR(255)    NOT NULL,
-    path    VARCHAR(255)    NOT NULL,
-    views   INT             DEFAULT 0
+    id          INT             AUTO_INCREMENT PRIMARY KEY,
+    name        VARCHAR(255)    NOT NULL,
+    descript    VARCHAR(255)    NOT NULL,
+    date        DATETIME        NOT NULL,
+    author      INT             NOT NULL,
+    cover       VARCHAR(255)    DEFAULT '/api/static/image/video_cover.jpg',
+    type        VARCHAR(255)    NOT NULL,
+    path        VARCHAR(255)    NOT NULL,
+    views       INT             DEFAULT 0
 )AUTO_INCREMENT=1000;
 
 /*

@@ -8,6 +8,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type recvUpload struct {
+	Name     string `json:"name,omitempty"`
+	Descript string `json:"descript,omitempty"`
+	Singer   string `json:"singer,omitempty"`
+	Type     string `json:"type,omitempty"`
+	Media    int    `json:"media,omitempty"`
+	Cover    int    `json:"cover,omitempty"`
+}
+
 // 接收上传文件信息
 func Upload(c *gin.Context) {
 	// 获取上传者id
@@ -32,14 +41,56 @@ func Upload(c *gin.Context) {
 	// 当上传的为视频时
 	if filetype == "video" {
 		// 接收json
-		var videoInfo model.Video
-		c.BindJSON(&videoInfo)
+		var recvInfo recvUpload
+		c.BindJSON(&recvInfo)
 
-		videoInfo.Author = id
-		videoInfo.Date = utils.NowTime()
+		// 查询视频路径
+		videoPath, err := model.QueryRowCommitOfId(recvInfo.Media)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"msg": "error",
+			})
+			return
+		}
+
+		// 查询封面路径
+		coverPath, err := model.QueryRowCommitOfId(recvInfo.Cover)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"msg": "error",
+			})
+			return
+		}
+
+		// 生成插入的数据
+		videoInfo := model.Video{
+			Name:     recvInfo.Name,
+			Descript: recvInfo.Descript,
+			Type:     recvInfo.Type,
+			Author:   id,
+			Date:     utils.NowTime(),
+			Path:     videoPath,
+			Cover:    coverPath,
+		}
 
 		// 数据库操作
-		err := model.InsertVideo(videoInfo)
+		err = model.InsertVideo(videoInfo)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"msg": "error",
+			})
+			return
+		}
+
+		// 修改提交状态为True
+		err = model.UpadteCommit(recvInfo.Media)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"msg": "error",
+			})
+			return
+		}
+		err = model.UpadteCommit(recvInfo.Cover)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"msg": "error",
@@ -54,13 +105,11 @@ func Upload(c *gin.Context) {
 		// 当上传的为音乐时
 	} else if filetype == "music" {
 		// 接收json
-		var musicInfo model.Music
-		c.BindJSON(&musicInfo)
+		var recvInfo recvUpload
+		c.BindJSON(&recvInfo)
 
-		musicInfo.Date = utils.NowTime()
-
-		// 数据库操作
-		err := model.InsertMusic(musicInfo)
+		// 查询视频路径
+		musicPath, err := model.QueryRowCommitOfId(recvInfo.Media)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"msg": "error",
@@ -68,22 +117,27 @@ func Upload(c *gin.Context) {
 			return
 		}
 
-		// 返回响应
-		c.JSON(http.StatusOK, gin.H{
-			"msg": "ok",
-		})
+		// 查询封面路径
+		coverPath, err := model.QueryRowCommitOfId(recvInfo.Cover)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"msg": "error",
+			})
+			return
+		}
 
-		// 当上传的为图片时
-	} else if filetype == "image" {
-		// 接收json
-		var imageInfo model.Image
-		c.BindJSON(&imageInfo)
-
-		imageInfo.Author = id
-		imageInfo.Date = utils.NowTime()
+		musicInfo := model.Music{
+			Name:     recvInfo.Name,
+			Descript: recvInfo.Descript,
+			Singer: recvInfo.Singer,
+			Type:     recvInfo.Type,
+			Date:     utils.NowTime(),
+			Path:     musicPath,
+			Cover:    coverPath,
+		}
 
 		// 数据库操作
-		err := model.InsertImage(imageInfo)
+		err = model.InsertMusic(musicInfo)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"msg": "error",

@@ -21,3 +21,21 @@ func QueryRowCommit(id int, name string, date string) (int, error) {
 
 	return respId, err
 }
+
+func QueryRowCommitOfId(id int) (string, error) {
+	var path string
+	// 预加载sql
+	stmt, err := Db.Prepare("SELECT path FROM commit_t WHERE id = ?")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	defer stmt.Close()
+
+	// 查询数据
+	err = stmt.QueryRow(id).Scan(&path)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	return path, err
+}

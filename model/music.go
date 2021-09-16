@@ -2,12 +2,13 @@ package model
 
 // 音乐数据结构体
 type Music struct {
-	Id     int    `json:"id"`
-	Name   string `json:"name"`
-	Date   string `json:"date"`
-	Singer string `json:"singer"`
-	Cover  string `json:"cover"`
-	Type   string `json:"type"`
-	Path   string `json:"path"`
-	Views  int    `json:"views"`
+	Id       int    `json:"id,omitempty"`
+	Name     string `json:"name,omitempty"`
+	Descript string `json:"descript,omitempty"`
+	Date     string `json:"date,omitempty"`
+	Singer   string `json:"singer,omitempty"`
+	Cover    string `json:"cover,omitempty"`
+	Type     string `json:"type,omitempty"`
+	Path     string `json:"path,omitempty"`
+	Views    int    `json:"views,omitempty"`
 }
