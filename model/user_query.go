@@ -41,3 +41,23 @@ func QueryRowUserOfToken(token string) (User, error) {
 
 	return user, err
 }
+
+// 通过用户id查询用户信息
+func QueryRowUserOfId(id int) (User, error) {
+	user := User{}
+
+	// 预加载sql
+	stmt, err := Db.Prepare("SELECT id, nickname, email, avator, birthday, intro, competence FROM user_t WHERE id = ?")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	defer stmt.Close()
+
+	// 查询数据
+	err = stmt.QueryRow(id).Scan(&user.Id, &user.NickName, &user.Email, &user.Avator,&user.Birthday, &user.Intro ,&user.Competence)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	return user, err
+}
