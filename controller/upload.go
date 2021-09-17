@@ -145,6 +145,22 @@ func Upload(c *gin.Context) {
 			return
 		}
 
+		// 修改提交状态为True
+		err = model.UpadteCommit(recvInfo.Media)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"msg": "error",
+			})
+			return
+		}
+		err = model.UpadteCommit(recvInfo.Cover)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"msg": "error",
+			})
+			return
+		}
+
 		// 返回响应
 		c.JSON(http.StatusOK, gin.H{
 			"msg": "ok",
