@@ -3,7 +3,7 @@ package model
 // 用户结构体
 type User struct {
 	Id         int    `json:"id,omitempty"`
-	NickName   string `json:"name,omitempty"`
+	NickName   string `json:"nickname,omitempty"`
 	Email      string `json:"email,omitempty"`
 	Password   string `json:"password,omitempty"`
 	Avator     string `json:"avator,omitempty"`
