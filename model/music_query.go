@@ -39,3 +39,20 @@ func QueryMusic(limit int64) ([]Music, error) {
 
 	return musicList, err
 }
+
+func QueryRowMusic(id int) (Music, error){
+	sql := "SELECT id, name, date, singer, cover, type, path, views FROM music_t WHERE id = ?"
+	stmt, err := Db.Prepare(sql)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	defer stmt.Close()
+
+	var music Music
+	err = stmt.QueryRow(id).Scan(&music.Id, &music.Name, &music.Date, &music.Singer, &music.Cover, &music.Type, &music.Path, &music.Views)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	return music, err
+}

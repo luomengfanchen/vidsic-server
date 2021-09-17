@@ -46,3 +46,29 @@ func LatestMusic(c *gin.Context) {
 		})
 	}
 }
+
+func GetMusic(c *gin.Context) {
+	id_str := c.Param("id")
+	id, err := strconv.Atoi(id_str)
+	if err != nil {
+		// 返回错误响应
+		c.JSON(http.StatusBadRequest, gin.H{
+			"msg": "error",
+		})
+		return
+	}
+
+	info, err := model.QueryRowMusic(id)
+	if err != nil {
+		// 返回错误响应
+		c.JSON(http.StatusBadRequest, gin.H{
+			"msg": "error",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"msg": "ok",
+		"data": info,
+	})
+}

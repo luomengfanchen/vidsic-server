@@ -29,6 +29,7 @@ func main() {
 		// 获取最新视频
 		api.GET("/video", controller.LatestVideo)
 
+		// 获取指定视频
 		api.GET("/video/:id", controller.GetVideo)
 
 		// 获取最新文章
@@ -36,6 +37,9 @@ func main() {
 
 		// 获取最新音乐
 		api.GET("/music", controller.LatestMusic)
+
+		// 获取指定音乐
+		api.GET("/music/:id", controller.GetMusic)
 
 		// 使用验证中间件验证用户身份
 		auth := api.Group("/auth",middleware.AuthorizeMiddle)
