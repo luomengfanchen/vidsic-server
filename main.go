@@ -41,6 +41,9 @@ func main() {
 		// 获取指定音乐
 		api.GET("/music/:id", controller.GetMusic)
 
+		// 搜索接口
+		api.GET("/search", controller.Search)
+
 		// 使用验证中间件验证用户身份
 		auth := api.Group("/auth",middleware.AuthorizeMiddle)
 		{
