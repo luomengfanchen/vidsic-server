@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"vidsic/controller"
 	"vidsic/middleware"
 	"vidsic/utils"
@@ -15,6 +16,14 @@ func init() {
 func main() {
 	r := gin.Default()
 
+	// 页面服务
+	r.LoadHTMLFiles(utils.Config.VueDist + "/index.html")
+	r.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", nil)
+	})
+	r.Static("/static", utils.Config.VueDist + "/static")
+
+	// api服务
 	api := r.Group("/api")
 	{
 		// api静态文件服务

@@ -8,6 +8,7 @@ import (
 
 // 可配置项结构体
 type Configuration struct {
+	VueDist    string
 	StaticPath string
 	Port       string
 }
