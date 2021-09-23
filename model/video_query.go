@@ -65,8 +65,8 @@ func QueryVideoOfName(name string) ([]Video, error){
 	// 最近视频列表
 	var videoList []Video
 
-	// 按照上传时间降序排列，并限制数据条数
-	sql := "SELECT id, name, date, author, cover, type, path, views FROM video_t WHERE name LIKE '%' || ? || '%'"
+	// 通过name进行模糊搜索
+	sql := "SELECT id, name, date, author, cover, type, path, views FROM video_t WHERE name LIKE ?"
 
 	// 预加载sql语句
 	stmt, err := Db.Prepare(sql)
@@ -76,7 +76,7 @@ func QueryVideoOfName(name string) ([]Video, error){
 	defer stmt.Close()
 
 	// 执行sql语句
-	rows, err := stmt.Query(name)
+	rows, err := stmt.Query("%" + name + "%")
 	if err != nil {
 		fmt.Println(err.Error())
 	}
