@@ -32,9 +32,6 @@ func main() {
 		// 获取指定视频
 		api.GET("/video/:id", controller.GetVideo)
 
-		// 获取最新文章
-		api.GET("/article", controller.LatestArticle)
-
 		// 获取最新音乐
 		api.GET("/music", controller.LatestMusic)
 

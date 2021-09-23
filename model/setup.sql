@@ -19,19 +19,6 @@ CREATE TABLE user_t (
 )AUTO_INCREMENT=1000;
 
 /*
-    专栏文件信息表
-*/
-CREATE TABLE article_t (
-    id      INT             AUTO_INCREMENT PRIMARY KEY,
-    name    VARCHAR(255)    NOT NULL,
-    date    DATETIME        NOT NULL,
-    author  INT             NOT NULL,
-    cover   VARCHAR(255)    DEFAULT '/api/static/image/article_cover.jpg',
-    text    VARCHAR(255)    NOT NULL,
-    views   INT             DEFAULT 0
-)AUTO_INCREMENT=1000;
-
-/*
     图像文件信息表
 */
 CREATE TABLE image_t (
