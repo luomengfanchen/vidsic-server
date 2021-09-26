@@ -42,7 +42,7 @@ func QueryVideo(limit int64) ([]Video, error) {
 
 // 通过id查询指定的视频
 func QueryRowVideo(id int) (Video, error){
-	sql := "SELECT id, name, date, author, cover, type, path, views FROM video_t WHERE id = ?"
+	sql := "SELECT id, name, descript, date, author, cover, type, path, views FROM video_t WHERE id = ?"
 	stmt, err := Db.Prepare(sql)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -50,7 +50,7 @@ func QueryRowVideo(id int) (Video, error){
 	defer stmt.Close()
 
 	var video Video
-	err = stmt.QueryRow(id).Scan(&video.Id, &video.Name, &video.Date, &video.Author, &video.Cover, &video.Type, &video.Path, &video.Views)
+	err = stmt.QueryRow(id).Scan(&video.Id, &video.Name, &video.Descript, &video.Date, &video.Author, &video.Cover, &video.Type, &video.Path, &video.Views)
 	if err != nil {
 		fmt.Println(err.Error())
 	}

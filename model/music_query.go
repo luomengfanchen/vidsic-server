@@ -42,7 +42,7 @@ func QueryMusic(limit int64) ([]Music, error) {
 
 // 通过id查询指定的视频
 func QueryRowMusic(id int) (Music, error){
-	sql := "SELECT id, name, date, singer, cover, type, path, views FROM music_t WHERE id = ?"
+	sql := "SELECT id, name, descript, date, singer, cover, type, path, views FROM music_t WHERE id = ?"
 	stmt, err := Db.Prepare(sql)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -50,7 +50,7 @@ func QueryRowMusic(id int) (Music, error){
 	defer stmt.Close()
 
 	var music Music
-	err = stmt.QueryRow(id).Scan(&music.Id, &music.Name, &music.Date, &music.Singer, &music.Cover, &music.Type, &music.Path, &music.Views)
+	err = stmt.QueryRow(id).Scan(&music.Id, &music.Name, &music.Descript, &music.Date, &music.Singer, &music.Cover, &music.Type, &music.Path, &music.Views)
 	if err != nil {
 		fmt.Println(err.Error())
 	}

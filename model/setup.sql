@@ -41,7 +41,7 @@ CREATE TABLE music_t (
     cover       VARCHAR(255)    DEFAULT '/api/static/image/music_cover.jpg',
     type        VARCHAR(255)    NOT NULL,
     path        VARCHAR(255)    NOT NULL,
-    views       INT             DEFAULT 0
+    views       INT             DEFAULT 1
 )AUTO_INCREMENT=1000;
 
 /*
@@ -56,7 +56,7 @@ CREATE TABLE video_t (
     cover       VARCHAR(255)    DEFAULT '/api/static/image/video_cover.jpg',
     type        VARCHAR(255)    NOT NULL,
     path        VARCHAR(255)    NOT NULL,
-    views       INT             DEFAULT 0
+    views       INT             DEFAULT 1
 )AUTO_INCREMENT=1000;
 
 /*
