@@ -67,6 +67,16 @@ func GetMusic(c *gin.Context) {
 		return
 	}
 
+	// 更改数据库，播放量+1
+	err = model.UpdateMusic(info)
+	if err != nil {
+		// 返回错误响应
+		c.JSON(http.StatusBadRequest, gin.H{
+			"msg": "error",
+		})
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"msg": "ok",
 		"data": info,
