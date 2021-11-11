@@ -2,6 +2,7 @@ package model
 
 import "fmt"
 
+// 添加信息到music表中
 func InsertMusic(info Music) error {
 	sql := "INSERT INTO music_t (name, date, singer, descript, cover, type, path) VALUES (?, ?, ?, ?, ?, ?, ?)"
 	stmt, err := Db.Prepare(sql)

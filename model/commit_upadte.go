@@ -2,6 +2,7 @@ package model
 
 import "fmt"
 
+// 更新提交状态
 func UpadteCommit(id int) error {
 	stmt, err := Db.Prepare("UPDATE commit_t SET status = TRUE WHERE id = ?")
 	if err != nil {

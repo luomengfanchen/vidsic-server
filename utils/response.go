@@ -2,6 +2,7 @@ package utils
 
 import "vidsic/model"
 
+// 响应数据结构体
 type ResponseVideo struct {
 	Id       int    `json:"id,omitempty"`
 	Name     string `json:"name,omitempty"`

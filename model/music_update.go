@@ -2,6 +2,7 @@ package model
 
 import "fmt"
 
+// 更新音乐数据，将播放量+1
 func UpdateMusic(music Music) error {
 	sql := "UPDATE music_t SET views = views + 1 WHERE id = ?"
 

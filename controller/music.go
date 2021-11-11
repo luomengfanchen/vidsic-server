@@ -47,6 +47,7 @@ func LatestMusic(c *gin.Context) {
 	}
 }
 
+// 获取指定的音乐信息
 func GetMusic(c *gin.Context) {
 	id_str := c.Param("id")
 	id, err := strconv.Atoi(id_str)

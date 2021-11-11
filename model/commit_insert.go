@@ -2,6 +2,7 @@ package model
 
 import "fmt"
 
+// 将信息插入到commit表中
 func InsertCommit(commit Commit) error {
 	// sql
 	sql := "INSERT INTO commit_t (name, date, path, type, commiter) VALUES (?, ?, ?, ?, ?)"

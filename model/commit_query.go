@@ -2,7 +2,7 @@ package model
 
 import "fmt"
 
-// 查询
+// 查询指定的提交信息
 func QueryRowCommit(id int, name string, date string) (int, error) {
 	var respId int
 
@@ -22,6 +22,7 @@ func QueryRowCommit(id int, name string, date string) (int, error) {
 	return respId, err
 }
 
+// 通过Id查询指定大的提交信息
 func QueryRowCommitOfId(id int) (string, error) {
 	var path string
 	// 预加载sql

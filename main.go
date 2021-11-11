@@ -9,10 +9,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// 加载配置文件
 func init() {
 	utils.LoadConfig("config.json")
 }
 
+// 路由监听配置
 func main() {
 	r := gin.Default()
 

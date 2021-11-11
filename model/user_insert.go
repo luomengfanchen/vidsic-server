@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// 添加新用户到user表中
 func InsertUser(user User) error {
 	// 插入用户sql语句
 	sql := "INSERT INTO user_t (nickname, email, password, birthday, intro, token)"
